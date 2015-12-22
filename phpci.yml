@@ -1,0 +1,52 @@
+build_settings:
+    verbose: true
+    ignore:
+        - "vendor"
+
+setup:
+    env:
+        APP_ENV: "testing"
+    composer:
+        action: "update"
+    shell:
+        - "cd %BUILD_PATH% && php artisan migrate  --seed --env=testing"
+
+test:
+    php_unit:
+       config:
+            - "phpunit.xml"
+    php_loc:
+        path: "app"
+    php_code_sniffer:
+        path: "app"
+        ignore:
+            - "app/views"
+            - "app/storage"
+            - "app/tests"
+            - "app/filters.php"
+            - "app/routes.php"
+        standard: "PSR1,PSR2"
+        allow_failures: true
+    php_docblock_checker:
+        path: "app"
+        allowed_warnings: 10
+        skip_classes: true
+    php_mess_detector:
+        rules:
+            - "codesize"
+            - "unusedcode"
+            - "naming"
+        path: "app"
+        ignore:
+            - "app/tests"
+        allow_failures: true
+        zero_config: true
+
+# We'll send an email ONLY IF the build fails!
+failed:
+    email:
+        # We should always email the committer.
+        committer: true
+        # We can also specify other addresses here too, multiples can be added on new lines.
+        addresses:
+            - "stefan.riedel.bo@gmail.com"
