@@ -7,7 +7,7 @@ setup:
     env:
         APP_ENV: "testing"
     composer:
-        action: "update"
+        action: "install"
     shell:
         - "cd %BUILD_PATH% && php artisan migrate  --seed --env=testing"
 
