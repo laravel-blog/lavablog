@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Lavablog
+        psr4_prefix: Lavablog
+        src_path: app
